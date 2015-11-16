@@ -4,8 +4,8 @@ var express = require('express'),
     swig = require('swig'),
     bodyParser = require('body-parser'),
     mime = require('mime'),
-    fs = require('fs');
-
+    fs = require('fs'),
+    sqlize = require('./models/index.js');
 // "constants" (not really) and our own modules
 var PORT = 1337,
     app = express(),
@@ -35,6 +35,8 @@ app.use(morgan('dev')); // logs req & res properties on response send
 // dynamic routing
 app.use('/', routes);
 
+
+
 // static routing
 app.use(express.static(__dirname + '/public'));
 
@@ -48,6 +50,7 @@ app.use(express.static(__dirname + '/public'));
 //     res.send(fileBuffer);
 //   });
 // });
+
 
 // if we got this far, we couldn't match the route, so send to error middleware
 app.use(function(req, res, next){
